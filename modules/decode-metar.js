@@ -6,7 +6,6 @@ class MetarDecode {
     getVis(metarStr){ //function to get visibility as number
         //extract visibility string using regex//
 
-        // this.input = metarStr;
         let vis = undefined;
 
         try {
@@ -53,6 +52,41 @@ class MetarDecode {
         for(let i = 0; i < arr.length; i++) {
             let vis = this.getVis(arr[i].metar);
             acc += vis;
+        }
+
+        acc = acc/arr.length;
+
+        return acc;
+    }
+    getWind(metarStr){ //function to get sustained wind value
+        let wind = undefined;
+
+        try {
+            const regex = /\d\d\d\d\dG?\d?\d?KT/; 
+            wind = metarStr.match(regex); //extract wind value group
+
+            //return 0 if wind value group missing
+            if(wind == undefined) {
+                return 0;
+            }
+
+            //extract sustained wind value from wind value group
+            wind = wind[0].slice(3, 5);
+            
+            //convert to integer
+            wind = parseInt(wind, 10);
+
+            return wind;
+
+        } catch(error) {
+            console.log(error);
+        }
+    }
+    getAverageWind(arr) { //function to get average wind of an array of metar objects
+        let acc = 0;
+        for(let i = 0; i < arr.length; i++) {
+            let wind = this.getWind(arr[i].metar);
+            acc += wind;
         }
 
         acc = acc/arr.length;
@@ -116,6 +150,6 @@ class MetarDecode {
 
 
 
-// module.exports = MetarDecode;
+module.exports = MetarDecode;
 
-export {MetarDecode};
+// export {MetarDecode};
