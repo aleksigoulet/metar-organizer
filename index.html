@@ -9,27 +9,24 @@
 </head>
 <body>
     <script type="module" src="app.js" defer></script>
-    <form action="">
-        <div>
-            <label for="metarInput">Input your METAR here:</label>
-            <input type="text" id="metarInput" name="metarInput">
-        </div>
-        <div>
-            <!-- <input type="submit" value="Submit" id="submitButton"> -->
-            <!-- <span id="submitButton">submit</span> -->
-            <button id="submitButton">Submit</button>
-        </div>
-    </form>
     
     <form id="csvSubmit">
+        <label for="csvFile">Input your METAR data here:</label>
         <input type="file" id="csvFile" accept=".csv" />
         <br/>
         <input type="submit" value="Submit File" />
     </form>
 
     <div>
-        <h1>The visibility is:</h1>
-        <h2 id="result"></h2>
+        <h2>Visibility</h2>
+        <p id="resultVis">Submit file to get value</p>
+        <br>
+    </div>
+
+    <div>
+        <h2>Winds</h2>
+        <p id="resultWind">Submit file to get value</p>
+        <br>
     </div>
     
 </body>
