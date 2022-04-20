@@ -72,7 +72,7 @@ class MetarDecode {
 
             //extract sustained wind value from wind value group
             wind = wind[0].slice(3, 5);
-            
+
             //convert to integer
             wind = parseInt(wind, 10);
 
@@ -126,13 +126,15 @@ class MetarDecode {
 
         return days;
     }
-    getCond(arr){ //function to get days of IFR vs days VFR, takes array of metars and returns object with IFR and VFR property
+    getCond(arr, windThreshold){ //function to get weather conditions, takes array of metars and returns object with properties for each condition
 
         const dayArr = this.getDaysArr(arr);
 
         let totalDays = dayArr.length;
         let ifrDays = 0;
         let vfrDays = 0;
+        let windLess = 0;
+        let windMore = 0;
 
         dayArr.forEach(el => {
             const avgVis = this.getAverageVis(el);
@@ -141,9 +143,16 @@ class MetarDecode {
             } else {
                 vfrDays++;
             }
+
+            const avgWind = this.getAverageWind(el);
+            if(avgWind < windThreshold){
+                windLess++;
+            } else {
+                windMore++;
+            }
         });
 
-        return {total: totalDays, ifr: ifrDays, vfr: vfrDays};
+        return {total: totalDays, ifr: ifrDays, vfr: vfrDays, windLess: windLess, windMore: windMore, windThreshold: windThreshold};
 
     }
 }
