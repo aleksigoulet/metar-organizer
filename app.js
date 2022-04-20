@@ -1,6 +1,6 @@
 // let metar = 'SPECI CYTZ 190039Z AUTO 07016G22KT 1 1/4SM -RA OVC004 02/01 A2990 RMK SLP128='
 
-// let metar = 'METAR CYHD 192000Z AUTO 320/05KT 2 1/16SM CLR 02/M10 A3012 RMK SLP225='
+
 
 // metar = metar.split(' ');
 
@@ -19,6 +19,68 @@
 //     input = input.split(' ');
 //     document.getElementById('result').innerHTML = input[5];
 // })
+
+
+
+
+
+
+
+
+////////////////
+///Production///
+////////////////
+
+
+//Import necessary functions
+// const MetarDecode = require('./modules/decode-metar.js');
+// const csvToArray = require('./modules/csvToArray.js');
+
+import { MetarDecode } from "./modules/decode-metar.js";
+import { csvToArray } from "./modules/csvToArray.js";
+
+const decoder = new MetarDecode();
+
+//create variables to store html form elements
+const csvSubmit = document.getElementById('csvSubmit');
+const csvFile = document.getElementById('csvFile');
+
+
+//Add event listener to handle file submission:
+csvSubmit.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const input = csvFile.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (ev) {
+        //create array of objects with file entries
+        const text = ev.target.result;
+        const data = csvToArray(text);
+        if(data[data.length-1].metar == undefined){
+            data.pop();
+        }
+        console.log(data);
+        //check that we are getting correct vis
+        const value = decoder.getVis(data[1].metar);
+        console.log(value);
+        //check average vis for entire period
+        const vis = decoder.getAverageVis(data)
+        console.log(`The average visibility over the period was ${vis}`);
+        document.getElementById('result').innerHTML = `The average visibility over the period was ${vis} SM`;
+    };
+
+    reader.readAsText(input);
+})
+
+
+
+
+
+
+
+/////////////
+///Testing///
+/////////////
 
 
 let result = {
@@ -52,6 +114,18 @@ let result = {
     }
 }
 
-module.exports = result;
+
+// let metar = 'CYTZ 100700Z AUTO 29009KT 240V300 9SM OVC040 02/M01 A2979 RMK WX MISG VIS MISG PCPN MISG SLP094'
+
+// const MetarDecode = require('./modules/decode-metar.js');
+
+
+// // module.exports = result;
+
+// const bugFix = new MetarDecode();
+
+// console.log(bugFix.getVis(metar));
 
 // console.log(result.getVis(metar));
+
+

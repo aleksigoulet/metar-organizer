@@ -8,7 +8,7 @@
     <title>METAR</title>
 </head>
 <body>
-    <script src="app.js" defer></script>
+    <script type="module" src="app.js" defer></script>
     <form action="">
         <div>
             <label for="metarInput">Input your METAR here:</label>
@@ -19,6 +19,12 @@
             <!-- <span id="submitButton">submit</span> -->
             <button id="submitButton">Submit</button>
         </div>
+    </form>
+    
+    <form id="csvSubmit">
+        <input type="file" id="csvFile" accept=".csv" />
+        <br/>
+        <input type="submit" value="Submit File" />
     </form>
 
     <div>
