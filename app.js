@@ -60,13 +60,11 @@ csvSubmit.addEventListener('submit', ev => {
             data.pop();
         }
         console.log(data);
-        //check that we are getting correct vis
-        const value = decoder.getVis(data[1].metar);
-        console.log(value);
-        //check average vis for entire period
-        const vis = decoder.getAverageVis(data)
-        console.log(`The average visibility over the period was ${vis}`);
-        document.getElementById('result').innerHTML = `The average visibility over the period was ${vis} SM`;
+
+        const conditions = decoder.getCond(data);
+        document.getElementById('result').innerHTML = `${conditions.total} days analyzed, ${conditions.ifr} days were IFR and ${conditions.vfr} days were VFR.`;
+
+
     };
 
     reader.readAsText(input);
