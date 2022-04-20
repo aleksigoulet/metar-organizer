@@ -159,6 +159,6 @@ class MetarDecode {
 
 
 
-module.exports = MetarDecode;
+// module.exports = MetarDecode;
 
-// export {MetarDecode};
+export {MetarDecode};
