@@ -1,8 +1,65 @@
+/* general styling */
+
 * {
-    font-family: sans-serif;
-    margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
 }
 
+html {
+    font-size: 16px;
+}
+
+body {
+    padding: 1% 5%;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+strong {
+    font-weight: 600;
+}
+
+
+
+/* headings */
+
 h1 {
-    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 0.7rem;
+}
+
+h3 {
+    margin-bottom: 0.5rem;
+}
+
+
+
+/* instructions */
+
+.code {
+    font-weight: 600;
+}
+
+.instruction{
+    margin-bottom: 2rem;
+}
+
+
+
+/* input form */
+
+label,
+input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.2rem;
 }
