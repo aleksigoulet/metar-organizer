@@ -9,7 +9,30 @@
 </head>
 <body>
     <script type="module" src="app.js" defer></script>
-    
+    <div>
+        <h1>METAR Analyzer</h1>
+        <p>Analyze your METAR data using the tool below.</p>
+        <p>The tool accepts .csv files containing historical data for a single location. Data entries must be of the format <span class="code">"station,valid,metar"</span>.</p> 
+        <p>Files can be generated using ISU's tool available <a href="https://mesonet.agron.iastate.edu/request/download.phtml">here</a>.</p>
+        <h3>Steps to download file using ISU's tool:</h3>
+        <ol>
+            <li>Select station.</li>
+            <li>Make sure to select <strong>"Raw METAR"</strong> in step 2 ("Select from Available Data").</li>
+            <li>Specify date range.</li>
+            <li>Make sure to select <strong>"UTC time"</strong> in step 4 ("Timezone of Observation Times").</li>
+            <li>Select the following in step 5:
+                <ul>
+                    <li>Date Format: <strong>"Comma Delimited"</strong></li> 
+                    <li>Include Lat/long: <strong>"NO"</strong></li>
+                    <li>Include Elevation: <strong>"NO"</strong></li>
+                    <li>How to represent missing data: <strong>"Use 'M'"</strong></li>
+                    <li>How to represent Trace reports: <strong>"Use 'T'"</strong></li>
+                    <li><strong>"Save result to computer"</strong></li>
+                </ul>
+            </li>
+            <li>Upload file below.</li>
+        </ol>
+    </div>
     <form id="csvSubmit">
         <label for="csvFile">Input your METAR data here:</label>
         <input type="file" id="csvFile" accept=".csv" />
@@ -17,14 +40,15 @@
         <input type="submit" value="Submit File" />
     </form>
 
+    <h2>Airport: <span id="resultAirport"></span></h2>
     <div>
-        <h2>Visibility</h2>
+        <h3>Visibility</h3>
         <p id="resultVis">Submit file to get value</p>
         <br>
     </div>
 
     <div>
-        <h2>Winds</h2>
+        <h3>Winds</h3>
         <p id="resultWind">Submit file to get value</p>
         <br>
     </div>

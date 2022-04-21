@@ -32,6 +32,8 @@ csvSubmit.addEventListener('submit', ev => {
         const conditions = decoder.getCond(data, 20);
 
         //display results to user
+        document.getElementById('resultAirport').innerHTML = data[0].station;
+
         document.getElementById('resultVis').innerHTML = `${conditions.total} days analyzed, ${conditions.ifr} days had an average of IFR visibility and ${conditions.vfr} days had an average of VFR visibility.`;
 
         document.getElementById('resultWind').innerHTML = `${conditions.total} days analyzed, ${conditions.windLess} days had average winds less than ${conditions.windThreshold} KTS and ${conditions.windMore} days had average winds greater than or equal to ${conditions.windThreshold} KTS.`;
